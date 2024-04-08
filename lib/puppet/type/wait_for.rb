@@ -136,6 +136,10 @@ Puppet::Type.newtype(:wait_for) do
     true
   end
 
+  newparam(:name, :namevar => true) {
+    desc "The name of the wait_for resource"
+  }
+
   newproperty(:exit_code, :array_matching => :all) do |property|
     include Mixins
 
@@ -176,8 +180,6 @@ Puppet::Type.newtype(:wait_for) do
   newparam(:query) do
     desc "The command to execute. The output of this command
       will be matched against the regex."
-
-    isnamevar
 
     validate do |command|
       raise ArgumentError,
